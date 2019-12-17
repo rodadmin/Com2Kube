@@ -43,7 +43,7 @@ class FileUpload extends React.Component {
   }
 
   fileUpload(file) {
-    const url = "http://dev-c2k.canadacentral.cloudapp.azure.com:5000"
+    const url = "/api/upload"
     const formData = new FormData()
     formData.append("file", file)
     const headerOptions = {
@@ -60,7 +60,12 @@ class FileUpload extends React.Component {
     return (
       <div>
         <form onSubmit={this.onFormSubmit} className={classes.form}>
-          <Input id="input" type="file" name="file" onChange={this.onChange} />
+          <Input
+            id="input"
+            type="file"
+            name="compose_file"
+            onChange={this.onChange}
+          />
           <DropzoneFile />
           <label htmlFor="file">
             <Box m={2}>
