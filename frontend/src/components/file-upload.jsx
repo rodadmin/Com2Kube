@@ -4,6 +4,11 @@ import { post } from "axios"
 import ProgressBar from "./progress"
 import DropzoneFile from "./dropzone-file"
 
+// TODO:
+/**
+ * Return file fix error
+ */
+
 const useStyles = () => ({
   form: {
     with: "100%",
@@ -25,10 +30,12 @@ class FileUpload extends React.Component {
 
   onFormSubmit(e) {
     const { file } = this.state
+    console.log(file)
     e.preventDefault()
     this.fileUpload(file).then((response) => {
       console.log(response.data)
     })
+    console.log("onFormSubmit")
   }
 
   onChange(e) {
@@ -36,12 +43,13 @@ class FileUpload extends React.Component {
   }
 
   fileUpload(file) {
-    const url = "http://localhost:5000"
+    const url = "http://dev-c2k.canadacentral.cloudapp.azure.com:5000"
     const formData = new FormData()
     formData.append("file", file)
     const headerOptions = {
       headers: {
-        "content-type": "multipart/form-data"
+        "content-type": "multipart/form-data",
+        "Access-Control-Allow-Origin": "*"
       }
     }
     return post(url, formData, headerOptions)

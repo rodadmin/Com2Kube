@@ -1,6 +1,16 @@
-import React, { useMemo } from "react"
-import { Box } from "@material-ui/core"
+import React, { useMemo, useCallback } from "react"
+import { Box, Paper } from "@material-ui/core"
 import { useDropzone } from "react-dropzone"
+import RootRef from "@material-ui/core/RootRef"
+
+// TODO:
+/**
+ * error handle + validation msg
+ * error when the user select img
+ * maximum file and minimum
+ * one file at the time (ATM)
+ * clean and reduce code
+ */
 
 const baseStyle = {
   flex: 1,
@@ -32,7 +42,7 @@ const rejectStyle = {
 }
 
 function DropzoneFile() {
-  const { getRootProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
+  const { isDragActive, isDragAccept, isDragReject } = useDropzone({
     accept: "/"
   })
 
@@ -46,12 +56,25 @@ function DropzoneFile() {
     [isDragActive, isDragReject]
   )
 
+  const onDrop = useCallback((acceptedFiles) => {
+    console.log(acceptedFiles)
+  }, [])
+
+  const { getRootProps, getInputProps } = useDropzone()
+  const { ref, ...rootProps } = getRootProps()
+  console.log(getRootProps)
+
   return (
-    <Box m={2}>
-      <div {...getRootProps({ style })}>
-        <p>Drag and drop some files here</p>
-      </div>
-    </Box>
+    <RootRef rootRef={ref}>
+      <Box m={2}>
+        <Paper {...rootProps}>
+          <div {...getRootProps({ style })}>
+            {/* <input {...getInputProps()} /> */}
+            <p>Drag and drop some files here</p>
+          </div>
+        </Paper>
+      </Box>
+    </RootRef>
   )
 }
 
