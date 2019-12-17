@@ -32,7 +32,8 @@ docker-compose up
 ### Frontend
 
 - React
-- React Material UI
+- React Material UI]
+- [React Dropzone](https://react-dropzone.js.org.)
 
 ### Backend
 
