@@ -43,9 +43,9 @@ class FileUpload extends React.Component {
   }
 
   fileUpload(file) {
-    const url = "/api/upload"
+    const url = "http://dev-c2k.canadacentral.cloudapp.azure.com:5000/api/upload"
     const formData = new FormData()
-    formData.append("file", file)
+    formData.append("compose_file", file)
     const headerOptions = {
       headers: {
         "content-type": "multipart/form-data",
