@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ProgressBar() {
   const classes = useStyles()
-  const [completed, setCompleted] = React.useState(0)
+  const [completed] = React.useState(0)
 
   return (
     <div className={classes.root}>

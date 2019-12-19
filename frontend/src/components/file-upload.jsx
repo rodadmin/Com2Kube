@@ -3,6 +3,8 @@ import { Button, Input, Box } from "@material-ui/core"
 import { post } from "axios"
 import ProgressBar from "./progress"
 import DropzoneFile from "./dropzone-file"
+// import Dropzone from "react-dropzone"
+import { reduxForm, Field } from "redux-form"
 
 // TODO:
 /**
@@ -20,6 +22,9 @@ const useStyles = () => ({
 class FileUpload extends React.Component {
   constructor(props) {
     super(props)
+    this.onDrop = (file) => {
+      this.setState({ file })
+    }
     this.state = {
       file: null
     }
@@ -32,10 +37,13 @@ class FileUpload extends React.Component {
     const { file } = this.state
     console.log(file)
     e.preventDefault()
-    this.fileUpload(file).then((response) => {
-      console.log(response.data)
-    })
-    console.log("onFormSubmit")
+    this.fileUpload(file)
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   onChange(e) {
@@ -59,15 +67,19 @@ class FileUpload extends React.Component {
     const classes = useStyles()
     return (
       <div>
-        <form onSubmit={this.onFormSubmit} className={classes.form}>
+        <form
+          onSubmit={this.onFormSubmit}
+          encType="multipart/form-data"
+          className={classes.form}
+        >
           <Input
-            id="input"
+            id="compose_file"
             type="file"
             name="compose_file"
             onChange={this.onChange}
           />
-          <DropzoneFile />
-          <label htmlFor="file">
+          <Field component={DropzoneFile} id="compose_file" name="compose_file" />
+          <label htmlFor="compose_file">
             <Box m={2}>
               <Button
                 type="submit"
