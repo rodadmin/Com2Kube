@@ -43,8 +43,11 @@ class FileUpload extends React.Component {
       })
   }
 
+  // CHECK: https://dev.to/nimahkh/how-to-handle-common-error-pages-in-react-and-axios-2fe8
+  // CHECK:: https://stackoverflow.com/questions/36897434/error-handling-in-react-best-practices/45658318
+  // CHECK: https://blog.bitsrc.io/understanding-error-boundaries-in-react-e58f15ae1f38
   fileUpload(file) {
-    const url = process.env.REACT_APP_ENV_URL
+    const url = "/api/upload"
     // eslint-disable-next-line no-undef
     const formData = new FormData()
     formData.append("compose_file", file)
@@ -72,6 +75,7 @@ class FileUpload extends React.Component {
             id="compose_file"
             type="file"
             name="compose_file"
+            required={true}
             onChange={this.onChange}
           />
           <Box m={2}>
